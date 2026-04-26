@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NOIR — Premium Men's Clothing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --white: #fafaf8;
+      --gold: #c9a84c;
+      --grey: #888880;
+      --dark: #141412;
+      --dark2: #1e1e1c;
+      --border: rgba(201,168,76,0.25);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(10,10,10,0.97);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 5px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: rgba(250,250,248,0.6);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-right { display: flex; gap: 20px; align-items: center; }
+    .nav-right a { color: rgba(250,250,248,0.6); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+    .nav-right a:hover { color: var(--gold); }
+    .cart-wrap { position: relative; }
+    .cart-dot {
+      position: absolute; top: -6px; right: -8px;
+      background: var(--gold); color: var(--black);
+      font-size: 8px; font-weight: 700;
+      width: 15px; height: 15px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(100deg, rgba(10,10,10,0.93) 42%, rgba(10,10,10,0.3) 100%),
+        url('https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=1600&q=85') center/cover no-repeat;
+      animation: hzoom 18s ease-in-out infinite alternate;
+    }
+    @keyframes hzoom { from { transform:scale(1); } to { transform:scale(1.04); } }
+    .hero-content {
+      position: relative;
+      padding: 0 80px;
+      max-width: 680px;
+      animation: fadeUp 1s ease both;
+    }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+    .pill {
+      display: inline-block;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); border: 1px solid var(--border);
+      padding: 7px 18px; margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 6vw, 84px);
+      font-weight: 900; line-height: 1.05; margin-bottom: 22px;
+    }
+    .hero h1 i { font-style: italic; color: var(--gold); }
+    .hero p {
+      font-size: 14px; line-height: 1.9;
+      color: rgba(250,250,248,0.6);
+      max-width: 440px; margin-bottom: 44px;
+    }
+    .btn {
+      display: inline-block; background: var(--gold); color: var(--black);
+      font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+      padding: 16px 44px; text-decoration: none; transition: background 0.3s;
+    }
+    .btn:hover { background: #e8c97a; }
+    .btn-ghost {
+      display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+      font-size: 10px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
+      padding: 15px 36px; text-decoration: none; margin-left: 16px; transition: all 0.3s;
+    }
+    .btn-ghost:hover { background: var(--gold); color: var(--black); }
+
+    /* TICKER */
+    .ticker { background: var(--gold); padding: 12px 0; overflow: hidden; }
+    .ticker-track {
+      display: flex; gap: 50px; width: max-content;
+      animation: ticker 22s linear infinite;
+    }
+    @keyframes ticker { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+    .ticker-track span {
+      font-size: 10px; font-weight: 600; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--black); white-space: nowrap;
+    }
+    .ticker-track .sep { opacity: 0.35; }
+
+    /* SECTIONS */
+    .sec { padding: 100px 80px; }
+    .sec-label { font-size: 10px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 700; line-height: 1.15; margin-bottom: 56px;
+    }
+    .sec-title i { font-style: italic; color: var(--gold); }
+
+    /* PRODUCTS */
+    .products-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+    .products-top .sec-title { margin-bottom: 0; }
+    .filter-row { display: flex; gap: 4px; }
+    .ftab {
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 9px 18px; border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(250,250,248,0.45); cursor: pointer; background: transparent; transition: all 0.25s;
+    }
+    .ftab.on, .ftab:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+
+    .pgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .pcard { background: var(--dark); overflow: hidden; position: relative; }
+    .pimg { position: relative; overflow: hidden; height: 420px; }
+    .pimg img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: top center;
+      display: block; transition: transform 0.7s ease;
+    }
+    .pcard:hover .pimg img { transform: scale(1.06); }
+
+    .pbadge {
+      position: absolute; top: 14px; left: 14px; z-index: 2;
+      font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 5px 11px; background: var(--gold); color: var(--black);
+    }
+    .pbadge.new-b { background: var(--white); color: var(--black); }
+
+    .poverlay {
+      position: absolute; inset: 0; background: rgba(10,10,10,0.55);
+      opacity: 0; transition: opacity 0.35s;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 20px; gap: 8px;
+    }
+    .pcard:hover .poverlay { opacity: 1; }
+    .oadd {
+      display: block; background: var(--gold); color: var(--black);
+      text-align: center; font-size: 10px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 13px; text-decoration: none; transition: background 0.3s;
+    }
+    .oadd:hover { background: #e8c97a; }
+    .owish {
+      display: block; border: 1px solid rgba(255,255,255,0.4); color: var(--white);
+      text-align: center; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 12px; text-decoration: none; transition: all 0.3s;
+    }
+    .owish:hover { border-color: var(--gold); color: var(--gold); }
+
+    .pinfo { padding: 18px 18px 22px; }
+    .pbrand { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+    .pname { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; color: var(--white); margin-bottom: 12px; line-height: 1.3; }
+    .pmeta { display: flex; justify-content: space-between; align-items: center; }
+    .pprice { font-size: 15px; font-weight: 600; color: var(--white); }
+    .pprice del { font-size: 11px; color: var(--grey); font-weight: 300; margin-right: 4px; }
+    .psizes { display: flex; gap: 8px; }
+    .psizes span { font-size: 9px; color: rgba(250,250,248,0.4); letter-spacing: 0.5px; }
+
+    /* BANNER */
+    .banner-sec { padding: 0 80px 100px; }
+    .banner { position: relative; height: 500px; overflow: hidden; display: flex; align-items: center; }
+    .banner-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(10,10,10,0.93) 38%, rgba(10,10,10,0.2) 100%),
+        url('https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=1400&q=85') center/cover no-repeat;
+    }
+    .banner-content { position: relative; padding: 60px; max-width: 520px; }
+    .banner-content .sec-label { margin-bottom: 16px; }
+    .banner-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(30px, 3.5vw, 48px); font-weight: 700; line-height: 1.15; margin-bottom: 18px; }
+    .banner-content p { font-size: 13px; color: rgba(250,250,248,0.6); line-height: 1.9; margin-bottom: 36px; }
+    .stats-row { display: flex; gap: 40px; margin-bottom: 40px; }
+    .stat-n { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--gold); }
+    .stat-l { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(250,250,248,0.45); margin-top: 3px; }
+
+    /* REVIEWS */
+    .reviews-sec { background: var(--dark2); padding: 100px 80px; }
+    .reviews-sec .sec-title { margin-bottom: 48px; }
+    .rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .rcard { background: var(--dark); border: 1px solid var(--border); padding: 36px; position: relative; }
+    .rcard::before {
+      content: '"'; position: absolute; top: 16px; right: 24px;
+      font-family: 'Playfair Display', serif; font-size: 72px;
+      color: var(--gold); opacity: 0.12; line-height: 1;
+    }
+    .stars { display: flex; gap: 3px; margin-bottom: 18px; }
+    .star { color: var(--gold); font-size: 12px; }
+    .star-e { color: rgba(201,168,76,0.25); font-size: 12px; }
+    .rtext { font-size: 13px; line-height: 1.85; color: rgba(250,250,248,0.72); margin-bottom: 24px; font-style: italic; }
+    .rauthor { display: flex; align-items: center; gap: 12px; }
+    .ravatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); }
+    .rname { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; }
+    .rtag { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-top: 2px; }
+    .rprod {
+      font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(250,250,248,0.3); border: 1px solid rgba(255,255,255,0.07);
+      display: inline-block; padding: 4px 10px; margin-top: 16px;
+    }
+
+    /* NEWSLETTER */
+    .nl-sec { padding: 100px 80px; text-align: center; }
+    .nl-sec .sec-label { display: block; }
+    .nl-sec .sec-title { max-width: 500px; margin: 0 auto 16px; }
+    .nl-sec p { font-size: 13px; color: rgba(250,250,248,0.5); margin-bottom: 44px; }
+    .nl-form { display: flex; max-width: 460px; margin: 0 auto; }
+    .nl-input {
+      flex: 1; background: var(--dark); border: 1px solid var(--border);
+      border-right: none; color: var(--white);
+      padding: 16px 22px; font-family: 'Montserrat', sans-serif; font-size: 11px; outline: none;
+    }
+    .nl-input::placeholder { color: var(--grey); }
+    .nl-btn {
+      background: var(--gold); color: var(--black); border: none;
+      padding: 16px 32px; font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; transition: background 0.3s;
+    }
+    .nl-btn:hover { background: #e8c97a; }
+
+    /* FOOTER */
+    footer { background: #060604; border-top: 1px solid rgba(201,168,76,0.12); padding: 70px 80px 36px; }
+    .fgrid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; margin-bottom: 56px; }
+    .flogo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; letter-spacing: 5px; color: var(--white); text-decoration: none; display: block; margin-bottom: 16px; }
+    .flogo span { color: var(--gold); }
+    .fdesc { font-size: 12px; color: rgba(250,250,248,0.4); line-height: 1.9; max-width: 260px; }
+    .fsocial { display: flex; gap: 10px; margin-top: 22px; }
+    .fsoc { width: 34px; height: 34px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: rgba(250,250,248,0.45); font-size: 12px; text-decoration: none; transition: all 0.3s; }
+    .fsoc:hover { border-color: var(--gold); color: var(--gold); }
+    .fcol h4 { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .fcol ul { list-style: none; }
+    .fcol li { margin-bottom: 10px; }
+    .fcol a { color: rgba(250,250,248,0.4); text-decoration: none; font-size: 12px; transition: color 0.3s; }
+    .fcol a:hover { color: var(--gold); }
+    .fbot { display: flex; justify-content: space-between; align-items: center; padding-top: 26px; border-top: 1px solid rgba(255,255,255,0.05); }
+    .fcopy { font-size: 11px; color: rgba(250,250,248,0.22); }
+    .fpay { display: flex; gap: 10px; }
+    .fpay span { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(250,250,248,0.22); border: 1px solid rgba(255,255,255,0.07); padding: 4px 10px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      nav, .sec, .banner-sec, .reviews-sec, .nl-sec, footer { padding-left: 40px; padding-right: 40px; }
+      .pgrid { grid-template-columns: repeat(2, 1fr); }
+      .rgrid { grid-template-columns: repeat(2, 1fr); }
+      .fgrid { grid-template-columns: 1fr 1fr; }
+      .hero-content { padding: 0 40px; }
+    }
+    @media (max-width: 680px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .sec, .nl-sec { padding: 64px 20px; }
+      .reviews-sec { padding: 64px 20px; }
+      footer { padding: 60px 20px 28px; }
+      .hero-content { padding: 0 24px; }
+      .pgrid { grid-template-columns: 1fr; }
+      .rgrid { grid-template-columns: 1fr; }
+      .fgrid { grid-template-columns: 1fr; }
+      .products-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .nl-form { flex-direction: column; }
+      .nl-input { border-right: 1px solid var(--border); border-bottom: none; }
+      .banner-sec { padding: 0 20px 64px; }
+      .banner-content { padding: 36px 28px; }
+      .stats-row { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">N<span>O</span>IR</a>
+  <ul class="nav-links">
+    <li><a href="#products">Collection</a></li>
+    <li><a href="#lookbook">Lookbook</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#">&#9906;</a>
+    <a href="#" class="cart-wrap">&#10038;<span class="cart-dot">2</span></a>
+  </div>
+</nav>
+
+<!-- HERO — background: man in turtleneck/fashion editorial -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="pill">New Arrivals — SS 2026</span>
+    <h1>Dress with <i>Purpose.</i></h1>
+    <p>Premium menswear for the man who values craft. Every piece is cut from the finest fabrics and built to last beyond the season.</p>
+    <a href="#products" class="btn">Shop Collection</a>
+    <a href="#lookbook" class="btn-ghost">Lookbook</a>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Free Shipping Over ৳5,000</span><span class="sep"> ✦ </span>
+    <span>Premium Fabrics</span><span class="sep"> ✦ </span>
+    <span>30-Day Returns</span><span class="sep"> ✦ </span>
+    <span>Exclusive Designs</span><span class="sep"> ✦ </span>
+    <span>Handcrafted Quality</span><span class="sep"> ✦ </span>
+    <span>Free Shipping Over ৳5,000</span><span class="sep"> ✦ </span>
+    <span>Premium Fabrics</span><span class="sep"> ✦ </span>
+    <span>30-Day Returns</span><span class="sep"> ✦ </span>
+    <span>Exclusive Designs</span><span class="sep"> ✦ </span>
+    <span>Handcrafted Quality</span><span class="sep"> ✦ </span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="sec" id="products">
+  <div class="products-top">
+    <div>
+      <div class="sec-label">Our Collection</div>
+      <h2 class="sec-title">Crafted for the <i>Bold</i></h2>
+    </div>
+    <div class="filter-row">
+      <button class="ftab on">All</button>
+      <button class="ftab">Suits</button>
+      <button class="ftab">Casual</button>
+      <button class="ftab">Outerwear</button>
+    </div>
+  </div>
+
+  <div class="pgrid">
+
+    <!-- 1. Casual T-Shirt -->
+    <div class="pcard">
+      <div class="pimg">
+        <span class="pbadge new-b">New</span>
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700&q=85&fit=crop&crop=top" alt="Casual T-Shirt"/>
+        <div class="poverlay">
+          <a href="#" class="oadd">Add to Cart</a>
+          <a href="#" class="owish">&#9825; Save</a>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">NOIR Casual</div>
+        <div class="pname">Casual T-Shirt</div>
+        <div class="pmeta">
+          <div class="pprice">৳1,800</div>
+          <div class="psizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Formal Shirt -->
+    <div class="pcard">
+      <div class="pimg">
+        <span class="pbadge new-b">New</span>
+        <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=700&q=85&fit=crop&crop=top" alt="Formal Shirt"/>
+        <div class="poverlay">
+          <a href="#" class="oadd">Add to Cart</a>
+          <a href="#" class="owish">&#9825; Save</a>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">NOIR Signature</div>
+        <div class="pname">Formal Shirt</div>
+        <div class="pmeta">
+          <div class="pprice">৳3,500</div>
+          <div class="psizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Denim Jeans -->
+    <div class="pcard">
+      <div class="pimg">
+        <span class="pbadge">Sale</span>
+        <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=700&q=85&fit=crop&crop=top" alt="Denim Jeans"/>
+        <div class="poverlay">
+          <a href="#" class="oadd">Add to Cart</a>
+          <a href="#" class="owish">&#9825; Save</a>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">NOIR Urban</div>
+        <div class="pname">Denim Jeans</div>
+        <div class="pmeta">
+          <div class="pprice"><del>৳5,500</del> ৳4,200</div>
+          <div class="psizes"><span>28</span><span>30</span><span>32</span><span>34</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Shorts -->
+    <div class="pcard">
+      <div class="pimg">
+        <img src="https://images.unsplash.com/photo-1591195853828-11db59a44f43?w=700&q=85&fit=crop&crop=top" alt="Shorts"/>
+        <div class="poverlay">
+          <a href="#" class="oadd">Add to Cart</a>
+          <a href="#" class="owish">&#9825; Save</a>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">NOIR Sport</div>
+        <div class="pname">Shorts</div>
+        <div class="pmeta">
+          <div class="pprice">৳2,200</div>
+          <div class="psizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Hoodie -->
+    <div class="pcard">
+      <div class="pimg">
+        <span class="pbadge new-b">New</span>
+        <img src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=700&q=85&fit=crop&crop=top" alt="Hoodie"/>
+        <div class="poverlay">
+          <a href="#" class="oadd">Add to Cart</a>
+          <a href="#" class="owish">&#9825; Save</a>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">NOIR Street</div>
+        <div class="pname">Hoodie</div>
+        <div class="pmeta">
+          <div class="pprice">৳4,800</div>
+          <div class="psizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Polo Shirt -->
+    <div class="pcard">
+      <div class="pimg">
+        <span class="pbadge">Sale</span>
+        <img src="https://images.unsplash.com/photo-1625910513856-4aa34b42a5e0?w=700&q=85&fit=crop&crop=top" alt="Polo Shirt"/>
+        <div class="poverlay">
+          <a href="#" class="oadd">Add to Cart</a>
+          <a href="#" class="owish">&#9825; Save</a>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">NOIR Sport</div>
+        <div class="pname">Polo Shirt</div>
+        <div class="pmeta">
+          <div class="pprice"><del>৳3,800</del> ৳2,900</div>
+          <div class="psizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Jacket -->
+    <div class="pcard">
+      <div class="pimg">
+        <span class="pbadge new-b">Exclusive</span>
+        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=700&q=85&fit=crop&crop=top" alt="Jacket"/>
+        <div class="poverlay">
+          <a href="#" class="oadd">Add to Cart</a>
+          <a href="#" class="owish">&#9825; Save</a>
+        </div>
+      </div>
+      <div class="pinfo">
+        <div class="pbrand">NOIR Outerwear</div>
+        <div class="pname">Jacket</div>
+        <div class="pmeta">
+          <div class="pprice">৳9,500</div>
+          <div class="psizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LOOKBOOK BANNER -->
+<section class="banner-sec" id="lookbook">
+  <div class="banner">
+    <div class="banner-bg"></div>
+    <div class="banner-content">
+      <div class="sec-label">SS 2026 Lookbook</div>
+      <h2>Refined Style, <i style="font-style:italic;color:var(--gold)">Effortless</i> Presence</h2>
+      <p>Discover pieces built for the man who commands a room without saying a word. Luxury is in the details.</p>
+      <div class="stats-row">
+        <div><div class="stat-n">100%</div><div class="stat-l">Premium Fabric</div></div>
+        <div><div class="stat-n">40+</div><div class="stat-l">Countries Shipped</div></div>
+        <div><div class="stat-n">5K+</div><div class="stat-l">Happy Buyers</div></div>
+      </div>
+      <a href="#" class="btn">View Lookbook</a>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-sec" id="reviews">
+  <div class="sec-label">Customer Reviews</div>
+  <h2 class="sec-title">What Our <i>Clients</i> Say</h2>
+  <div class="rgrid">
+
+    <div class="rcard">
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="rtext">The Charcoal Suit is exceptional. I wore it to an important board meeting and received compliments all day. The tailoring is precise and the wool fabric breathes perfectly. Worth every taka.</p>
+      <div class="rauthor">
+        <img class="ravatar" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" alt="Aryan"/>
+        <div><div class="rname">Aryan Chowdhury</div><div class="rtag">Verified Buyer</div></div>
+      </div>
+      <span class="rprod">Slim Fit Charcoal Suit</span>
+    </div>
+
+    <div class="rcard">
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="rtext">I ordered the Heritage Overcoat and it arrived in two days, beautifully packaged. The wool quality is outstanding — warm but not heavy. This coat will last many winters. Highly recommended.</p>
+      <div class="rauthor">
+        <img class="ravatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Tariq"/>
+        <div><div class="rname">Tariq Rahman</div><div class="rtag">Verified Buyer</div></div>
+      </div>
+      <span class="rprod">Heritage Wool Overcoat</span>
+    </div>
+
+    <div class="rcard">
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star-e">★</span></div>
+      <p class="rtext">The Merino Sweater is incredibly soft — a genuine cashmere-like feel. I bought the navy colourway and get stopped and asked about it regularly. Already planning to order the burgundy.</p>
+      <div class="rauthor">
+        <img class="ravatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt="Rohan"/>
+        <div><div class="rname">Rohan Sikder</div><div class="rtag">Verified Buyer</div></div>
+      </div>
+      <span class="rprod">Merino Knit Sweater</span>
+    </div>
+
+    <div class="rcard">
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="rtext">The Oxford Shirt is now my daily office staple. The fabric is crisp without being stiff and it keeps its shape all day. Sizing is spot-on — medium fits perfectly. Will be ordering more colours.</p>
+      <div class="rauthor">
+        <img class="ravatar" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&q=80" alt="Zaid"/>
+        <div><div class="rname">Zaid Hossain</div><div class="rtag">Loyal Customer</div></div>
+      </div>
+      <span class="rprod">Oxford Button-Down Shirt</span>
+    </div>
+
+    <div class="rcard">
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="rtext">Best chinos I have ever owned. The slim taper is exactly right — not too tight, not baggy. Slight stretch makes them comfortable all day. Three pairs in my wardrobe now and counting.</p>
+      <div class="rauthor">
+        <img class="ravatar" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&q=80" alt="Imran"/>
+        <div><div class="rname">Imran Faruqi</div><div class="rtag">Repeat Buyer</div></div>
+      </div>
+      <span class="rprod">Slim Tapered Chinos</span>
+    </div>
+
+    <div class="rcard">
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <p class="rtext">The Piqué Polo is a class above anything I have bought locally. The fabric is thick, the collar holds its shape and the fit is perfect. I gifted one to my father and he loves it too.</p>
+      <div class="rauthor">
+        <img class="ravatar" src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&q=80" alt="Nabil"/>
+        <div><div class="rname">Nabil Karim</div><div class="rtag">Verified Buyer</div></div>
+      </div>
+      <span class="rprod">Premium Piqué Polo</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="nl-sec" id="contact">
+  <div class="sec-label">Stay Updated</div>
+  <h2 class="sec-title">Join the <i>Inner Circle</i></h2>
+  <p>Early access to new drops, exclusive offers, and style guides — delivered to your inbox.</p>
+  <div class="nl-form">
+    <input class="nl-input" type="email" placeholder="Enter your email address"/>
+    <button class="nl-btn">Subscribe</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fgrid">
+    <div>
+      <a href="#" class="flogo">N<span>O</span>IR</a>
+      <p class="fdesc">Premium menswear crafted for those who live with intention. Quality over noise, always.</p>
+      <div class="fsocial">
+        <a href="#" class="fsoc">in</a>
+        <a href="#" class="fsoc">ig</a>
+        <a href="#" class="fsoc">fb</a>
+        <a href="#" class="fsoc">yt</a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Suits &amp; Blazers</a></li>
+        <li><a href="#">Shirts</a></li>
+        <li><a href="#">Outerwear</a></li>
+        <li><a href="#">Trousers</a></li>
+        <li><a href="#">Knitwear</a></li>
+        <li><a href="#">Sale</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Sustainability</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <p class="fcopy">© 2026 NOIR Menswear. All rights reserved.</p>
+    <div class="fpay">
+      <span>bKash</span><span>Nagad</span><span>Visa</span><span>Mastercard</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
